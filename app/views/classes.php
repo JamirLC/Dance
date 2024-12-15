@@ -1,5 +1,5 @@
 <?php
-include APP_DIR.'views/templates/header.php';
+include APP_DIR . 'views/templates/header.php';
 
 // Get the current page name to highlight the active link
 $current_page = basename($_SERVER['PHP_SELF']);
@@ -8,7 +8,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <style>
     /* General Styling */
     body {
-        font-family: 'Arial', sans-serif;
+        font-family: Nunito, sans-serif;
         background-color: #f7f9fc;
         color: #333;
     }
@@ -22,27 +22,33 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     /* Sidebar Styling */
     #sidebar {
-        background-color: #fff; /* White background for the sidebar */
+        background-color: #fff;
+        /* Set sidebar background color to white */
         color: #333;
         min-height: 100vh;
-        border-right: 1px solid #ddd;
     }
 
     #sidebar .nav-link {
-        color: #333; /* Dark text color */
-        font-size: 18px; /* Increase text size */
+        color: #333;
+        /* Dark text color */
+        font-size: 18px;
+        /* Increase text size */
         display: flex;
         align-items: center;
     }
 
     #sidebar .nav-link.active {
-        color: #1E90FF; /* Blue color for active links */
+        color: #1E90FF;
+        /* Active link blue */
         font-weight: bold;
+        /* Make active link bold */
     }
 
-    #sidebar .nav-link i {
-        margin-right: 10px; /* Add spacing between icon and text */
-        font-size: 20px; /* Set icon size */
+    #sidebar .nav-link .icon {
+        margin-right: 10px;
+        /* Add spacing between icon and text */
+        font-size: 20px;
+        /* Set icon size */
     }
 
     #sidebar .nav-item {
@@ -51,8 +57,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     /* Logo in the sidebar */
     #sidebar .logo {
-        width: 200px; /* Set the width of the logo */
-        margin: 20px auto; /* Center the logo */
+        width: 200px;
+        /* Set the width of the logo */
+        margin: 20px auto;
+        /* Center the logo */
         display: block;
     }
 
@@ -63,6 +71,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             width: 100%;
             z-index: 1000;
         }
+
         main {
             margin-top: 60px;
         }
@@ -71,7 +80,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 <body>
     <div id="app">
-        <?php include APP_DIR.'views/templates/nav.php'; ?>
+        <?php include APP_DIR . 'views/templates/nav.php'; ?>
 
         <div class="container-fluid">
             <div class="row">
@@ -172,4 +181,5 @@ $current_page = basename($_SERVER['PHP_SELF']);
         });
     </script>
 </body>
+
 </html>
