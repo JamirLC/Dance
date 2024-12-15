@@ -24,7 +24,6 @@ class UserAppointment extends Controller
 
     public function getClasses()
     {
-
         $classes = $this->appointments_model->getClasses();
         echo json_encode($classes);
     }
@@ -35,7 +34,7 @@ class UserAppointment extends Controller
             echo json_encode(['success' => false, 'message' => 'Invalid class ID']);
             return;
         }
-
+        
         $result = $this->appointments_model->reduceClassSlots($class_id);
 
         if ($result) {

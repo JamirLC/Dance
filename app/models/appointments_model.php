@@ -84,6 +84,17 @@ class Appointments_model extends Model
         return false;
     }
 
+    public function checkRegistrationStatus($class_id) {
+        $id = $this->session->userdata('id');
+        $sql = "SELECT * FROM appointment WHERE id = ? AND class_id = ?";
+        $query = $this->db->raw($sql, [$id, $class_id]);
+        if ($query && $query->count() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getAppointments() {
         $query = 'SELECT 
             u.id AS user_id, 
