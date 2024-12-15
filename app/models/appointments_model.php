@@ -68,4 +68,22 @@ class Appointments_model extends Model
     {
         return $this->db->table('dance_classes')->get_all(); // Fetching all records from 'classes' table
     }
+
+    public function reduceClassSlots($class_id)
+    {
+        // Fetch the class record
+        $class = $this->db->table('dance_classes')->where('class_id', $class_id)->get(); // Replace with the correct method
+
+        // Check if the record exists and slots are available
+        if ($class && $class['available_slots'] > 0) {
+            // Reduce the slots
+            $updated = $this->db->table('dance_classes')->where('class_id', $class_id)->update([
+                'available_slots' => $class['available_slots'] - 1
+            ]);
+
+            return $updated;
+        }
+
+        return false; // Return false if no slots available or class not found
+    }
 }

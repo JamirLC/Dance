@@ -38,3 +38,4 @@ $router->group('/auth', function () use ($router) {
 
 $router->get('/appoint', 'Appointments_controller::appoint');  // View all appoint
 $router->get('/appointments/get_classes', 'Appointments_controller::getClasses'); // AJAX route for fetching classes
+$router->post('/appointments/register_class/{class_id}', 'Appointments_controller::registerClass');

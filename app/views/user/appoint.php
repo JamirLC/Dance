@@ -36,43 +36,94 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Fetch classes via AJAX when the page loads
             fetchClasses();
 
             function fetchClasses() {
                 fetch('/appointments/get_classes')
                     .then(response => response.json())
                     .then(classes => {
-                        // Get the container where classes will be displayed
                         const classList = document.getElementById('class-list');
-                        classList.innerHTML = ''; // Clear existing content
+                        classList.innerHTML = '';
 
-                        // Loop through the classes and create cards
                         classes.forEach(cls => {
                             const card = `
-                            <div class="col">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="card-title">${cls.class_name}</h5>
-                                            <p class="card-text mb-0">${cls.class_time}</p>
-                                        </div>
-                                        <p class="card-text">Instructor: ${cls.instructor_name}</p>
-                                        <p class="card-text">Slots Available: ${cls.available_slots}</p>
-                                        <a href="#" class="btn btn-primary">Register</a>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title">${cls.class_name}</h5>
+                                        <p class="card-text mb-0">${cls.class_time}</p>
                                     </div>
+                                    <p class="card-text">Instructor: ${cls.instructor_name}</p>
+                                    <p class="card-text">Slots Available: <span id="slots-${cls.class_id}">${cls.available_slots}</span></p>
+                                    <button class="btn btn-primary register-btn" data-class-id="${cls.class_id}">Register</button>
                                 </div>
                             </div>
-                        `;
+                        </div>`;
                             classList.innerHTML += card;
+                        });
+
+                        // Attach event listeners to all register buttons
+                        document.querySelectorAll('.register-btn').forEach(button => {
+                            button.addEventListener('click', function() {
+                                const classId = this.getAttribute('data-class-id');
+                                registerClass(classId);
+                            });
                         });
                     })
                     .catch(error => console.error('Error fetching classes:', error));
             }
+
+            function registerClass(classId) {
+                fetch(`/appointments/register_class/${classId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                    .then(response => response.text()) // Get raw response
+                    .then(text => {
+                        try {
+                            const data = JSON.parse(text); // Parse JSON if valid
+                            if (data.success) {
+                                // Update the slots available dynamically
+                                const slotsElement = document.getElementById(`slots-${classId}`);
+                                const currentSlots = parseInt(slotsElement.textContent, 10);
+                                if (!isNaN(currentSlots)) {
+                                    slotsElement.textContent = Math.max(currentSlots - 1, 0); // Decrease by 1, minimum 0
+                                }
+
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Registered!',
+                                    text: data.message,
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops!',
+                                    text: data.message,
+                                });
+                            }
+                        } catch (err) {
+                            console.error('Invalid JSON response:', text); // Log invalid response
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: 'An unexpected error occurred. Please try again later.',
+                            });
+                        }
+                    })
+                    .catch(error => console.error('Error registering class:', error));
+            }
         });
     </script>
+
+
 </body>
 
 </html>

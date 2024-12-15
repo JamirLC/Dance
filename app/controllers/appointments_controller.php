@@ -110,4 +110,20 @@ class Appointments_controller extends Controller
         // Return the classes as JSON for AJAX
         echo json_encode($classes);
     }
+
+    public function registerClass($class_id)
+    {
+        if (!is_numeric($class_id)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid class ID']);
+            return;
+        }
+
+        $result = $this->appointments_model->reduceClassSlots($class_id);
+
+        if ($result) {
+            echo json_encode(['success' => true, 'message' => 'Thank you for registering!']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Registration failed. No slots available.']);
+        }
+    }
 }
