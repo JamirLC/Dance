@@ -8,18 +8,11 @@ class UserAppointment extends Controller
     {
         parent::__construct();
         $userRole = $this->session->userdata('role');
-        if ($userRole != 'user') {
-<<<<<<< Updated upstream
+        if ($userRole != 'admin') {
             redirect('auth');
         }
         if (! logged_in()) {
             redirect('auth');
-        }
-    }
-}
-?>
-=======
-            redirect('/');
         }
         $this->call->model('appointments_model');
     }
@@ -52,4 +45,3 @@ class UserAppointment extends Controller
         }
     }
 }
->>>>>>> Stashed changes
