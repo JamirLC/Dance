@@ -5,7 +5,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 $router->get('/', 'Auth'); // Default to Auth controller for the root route
 
 # Home and navigation routes
-$router->get('/home', 'Home');  // Home route
+$router->get('/admin/dashboard', 'Home');  // Home route
 $router->get('/sessions', 'Home::Sessions');  // Sessions route
 $router->get('/classes', 'Home::Classes');  // Classes route
 $router->get('/about-us', 'Home::Aboutus');  // About Us route
@@ -26,9 +26,6 @@ $router->match('/appointments/edit/{id}', 'Appointments_controller::edit_appoint
 
 # Calendar routes
 $router->get('/calendar', 'Calendar_controller::index');  // Calendar view with appointments marked
-
-
-
 
 # Auth routes (Group)
 $router->group('/auth', function() use ($router) {

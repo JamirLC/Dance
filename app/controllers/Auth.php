@@ -2,18 +2,25 @@
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 class Auth extends Controller {
-
     public function __construct()
     {
         parent::__construct();
-        if(segment(2) != 'logout') {
-            if(logged_in()) {
-                redirect('home');
+        $this->call->model('User_model', 'user');
+        
+        if (segment(2) != 'logout') {
+            if (logged_in()) {
+                $userRole = $this->session->userdata('role'); 
+                
+                if ($userRole == 'admin') {
+                    redirect('/admin/dashboard');
+                } else {
+                    redirect('/user/dashboard'); 
+                }
             }
         }
         $this->call->library('email');
     }
-	
+
     public function index() {
         $this->call->view('auth/login');
     }  
@@ -27,6 +34,15 @@ class Auth extends Controller {
 				$this->session->set_flashdata(['is_invalid' => 'is-invalid']);
                 $this->session->set_flashdata(['err_message' => 'These credentials do not match our records.']);
 			} else {
+                $getSessionInfo = $this->user->getUser($data);
+                $newdata = array(
+                    'id'        => isset($getSessionInfo['id']) ? $getSessionInfo['id'] : '',
+                    'username'  => isset($getSessionInfo['username']) ? $getSessionInfo['username'] : '',
+                    'email'     => isset($getSessionInfo['email']) ? $getSessionInfo['email'] : '',
+                    'role'      => isset($getSessionInfo['role']) ? $getSessionInfo['role'] : '',
+                    'logged_in' => TRUE
+                );
+                $this->session->set_userdata($newdata);
 				$this->lauth->set_logged_in($data);
 			}
             redirect('auth/login');
