@@ -5,7 +5,7 @@ defined('PREVENT_DIRECT_ACCESS') or exit('No direct script access allowed');
 $router->get('/', 'Auth'); // Default to Auth controller for the root route
 
 # Home and navigation routes
-$router->get('/admin/dashboard', 'Home');  // Home route
+$router->get('/home', 'Home');  // Home route
 $router->get('/sessions', 'Home::Sessions');  // Sessions route
 $router->get('/classes', 'Home::Classes');  // Classes route
 $router->get('/about-us', 'Home::Aboutus');  // About Us route
