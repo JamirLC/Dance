@@ -10,15 +10,42 @@ class Appointments_controller extends Controller
         $this->call->model('appointments_model'); // Load the Appointments model
     }
 
-    // Display all appointments
     public function index()
     {
-        // Fetch all appointments from the model
-        $data['appointments'] = $this->appointments_model->getAppointments();
+        $appointments = $this->appointments_model->getAppointments();
+        $calendar = [];
+        $entries = [];
 
-        // Pass data to the view
+        foreach ($appointments as $appointment) {
+            $dateTime = new DateTime($appointment['class_time']);
+            $formattedDate = $dateTime->format('l, F j, Y h:i A');            
+            $entries[] = [
+                'name' => $appointment['name'],
+                'class_name' => $appointment['class_name'],
+                'class_time' => $formattedDate,
+                'email' => $appointment['email']
+            ];
+
+            $calendar[] = [
+                'title' => $appointment['class_name'],
+                'start' => $dateTime->format('Y-m-d\TH:i:s'), // ISO format for FullCalendar
+                'description' => $appointment['email'] . ' at ' . $dateTime->format('g:i a') // Lowercase am/pm
+            ];
+
+        }
+        $data = [
+            'calendar' => $calendar,
+            'appointments' => $entries 
+        ];
+
         $this->call->view('appointments/index', $data);
     }
+
+
+
+
+
+
 
     // Show appointment creation form
     public function create()

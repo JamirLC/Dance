@@ -12,9 +12,9 @@ class Auth extends Controller {
                 $userRole = $this->session->userdata('role'); 
                 
                 if ($userRole == 'admin') {
-                    redirect('/admin/dashboard');
+                    redirect('home');
                 } else {
-                    redirect('/user/dashboard'); 
+                    redirect('home'); 
                 }
             }
         }
@@ -53,7 +53,6 @@ class Auth extends Controller {
     }
 
     public function register() {
-
         if($this->form_validation->submitted()) {
             $username = $this->io->post('username');
             $email = $this->io->post('email');

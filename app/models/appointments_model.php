@@ -9,11 +9,6 @@ class Appointments_model extends Model
      *
      * @return array|false Array of appointments or false on failure
      */
-    public function getAppointments()
-    {
-        return $this->db->table('appointments')->get_all(); // Fetching all records from 'appointments' table
-    }
-
     /**
      * Create a new appointment
      *
@@ -71,19 +66,44 @@ class Appointments_model extends Model
 
     public function reduceClassSlots($class_id)
     {
-        // Fetch the class record
-        $class = $this->db->table('dance_classes')->where('class_id', $class_id)->get(); // Replace with the correct method
+        $class = $this->db->table('dance_classes')->where('class_id', $class_id)->get(); 
 
-        // Check if the record exists and slots are available
         if ($class && $class['available_slots'] > 0) {
-            // Reduce the slots
             $updated = $this->db->table('dance_classes')->where('class_id', $class_id)->update([
                 'available_slots' => $class['available_slots'] - 1
             ]);
 
-            return $updated;
+            $appointment = array(
+                'class_id' => $class_id,
+                'id'=> $this->session->userdata('id'),
+            );
+            
+            return $this->db->table('appointment')->insert($appointment);
+            
         }
-
-        return false; // Return false if no slots available or class not found
+        return false;
     }
+
+    public function getAppointments() {
+        $query = 'SELECT 
+            u.id AS user_id, 
+            u.username AS name, 
+            u.email,
+            dc.class_id, 
+            dc.class_name, 
+            dc.instructor_name, 
+            dc.class_time, 
+            dc.available_slots,
+            a.id AS appointment_id
+        FROM 
+            appointment a
+        LEFT JOIN 
+            users u ON a.id = u.id 
+        LEFT JOIN 
+            dance_classes dc ON a.class_id = dc.class_id;
+        ';
+
+        return $this->db->raw($query);
+    }
+
 }
