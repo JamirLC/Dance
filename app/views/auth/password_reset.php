@@ -18,7 +18,7 @@
 
         main {
             flex-grow: 1;
-            margin-left: 200px;
+            margin-left: 250px;
             /* Sidebar width */
             padding: 40px 20px;
             background-color: #f9fafb;
