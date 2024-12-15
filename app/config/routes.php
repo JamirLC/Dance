@@ -1,5 +1,5 @@
 <?php
-defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
+defined('PREVENT_DIRECT_ACCESS') or exit('No direct script access allowed');
 
 # Default route
 $router->get('/', 'Auth'); // Default to Auth controller for the root route
@@ -27,15 +27,13 @@ $router->match('/appointments/edit/{id}', 'Appointments_controller::edit_appoint
 # Calendar routes
 $router->get('/calendar', 'Calendar_controller::index');  // Calendar view with appointments marked
 
-
-
-
 # Auth routes (Group)
-$router->group('/auth', function() use ($router) {
+$router->group('/auth', function () use ($router) {
     $router->match('/register', 'Auth::register', ['POST', 'GET']);  // Register route
     $router->match('/login', 'Auth::login', ['POST', 'GET']);  // Login route
     $router->get('/logout', 'Auth::logout');  // Logout route
     $router->match('/password-reset', 'Auth::password_reset', ['POST', 'GET']);  // Password reset route
     $router->match('/set-new-password', 'Auth::set_new_password', ['POST', 'GET']);  // Set new password route
 });
-?>
+
+$router->get('/appoint', 'Appointments_controller::appoint');  // View all appointments
