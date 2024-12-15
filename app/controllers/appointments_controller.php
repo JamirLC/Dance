@@ -119,37 +119,4 @@ class Appointments_controller extends Controller
         // Pass the data to the view for the calendar
         $this->call->view('dashboard/index', $data);
     }
-
-    // Display all appointments
-    public function appoint()
-    {
-        // Fetch all appointments from the model
-        // $data['appointments'] = $this->appointments_model->getAppointments();
-
-        // Pass data to the view
-        $this->call->view('user/appoint');
-    }
-
-    public function getClasses()
-    {
-        // Fetch classes from the database using the model
-        $classes = $this->appointments_model->getClasses();
-        echo json_encode($classes);
-    }
-
-    public function registerClass($class_id)
-    {
-        if (!is_numeric($class_id)) {
-            echo json_encode(['success' => false, 'message' => 'Invalid class ID']);
-            return;
-        }
-
-        $result = $this->appointments_model->reduceClassSlots($class_id);
-
-        if ($result) {
-            echo json_encode(['success' => true, 'message' => 'Thank you for registering!']);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Registration failed. No slots available.']);
-        }
-    }
 }
