@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Reset Password</title>
-    <link rel="icon" type="image/png" href="<?=base_url();?>public/img/favicon.ico"/>
+    <link rel="icon" type="image/png" href="<?= base_url(); ?>public/img/favicon.ico" />
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href="<?=base_url();?>public/css/main.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>public/css/main.css" rel="stylesheet">
     <style>
         body {
             font-family: Nunito, sans-serif;
@@ -42,13 +43,11 @@
 
         main {
             flex-grow: 1;
-            margin-left: 320px;
+            margin-left: 200px;
             padding: 40px 20px;
             background-color: #f9fafb;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
         }
 
         .card {
@@ -88,7 +87,7 @@
         }
 
         .btn-primary:hover {
-            background-color: #1e90ff;
+            background-color: #1E90FF;
         }
 
         .invalid-feedback {
@@ -115,30 +114,25 @@
         }
     </style>
 </head>
-<body>
-    <div id="app">
-        <!-- Sidebar -->
-        <nav id="sidebar">
-            <div class="logo">
-                <img src="/public/image/dance.png" alt="Dance Studio Logo">
-            </div>
-        </nav>
 
+<body>
+    <?php include APP_DIR . 'views/templates/nav_auth.php'; ?>
+    <div id="app">
         <!-- Main Content -->
         <main>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card">
-                            <div class="card-header">Reset Password</div>
+                            <div class="card-header text-center">Reset Password</div>
                             <div class="card-body">
-                                <form method="POST" action="<?=site_url('auth/password-reset');?>">
+                                <form method="POST" action="<?= site_url('auth/password-reset'); ?>">
                                     <?php csrf_field(); ?>
                                     <div class="row mb-3">
                                         <label for="email" class="col-md-4 col-form-label text-md-end">Email Address</label>
                                         <div class="col-md-6">
-                                            <?php $LAVA =& lava_instance(); ?>
-                                            <input id="email" type="email" class="form-control <?=$LAVA->session->flashdata('alert');?>" name="email" required>
+                                            <?php $LAVA = &lava_instance(); ?>
+                                            <input id="email" type="email" class="form-control <?= $LAVA->session->flashdata('alert'); ?>" name="email" required>
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>We can't find a user with that email address.</strong>
                                             </span>
@@ -166,4 +160,5 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
+
 </html>

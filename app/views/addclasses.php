@@ -1,5 +1,5 @@
 <?php
-include APP_DIR.'views/templates/header.php';
+include APP_DIR . 'views/templates/header.php';
 
 // Get the current page name to highlight the active link
 $current_page = basename($_SERVER['PHP_SELF']);
@@ -7,10 +7,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <style>
     /* General styling */
     body {
-        font-family: Arial, sans-serif;
+        font-family: Nunito, sans-serif;
         background-color: #f7f9fc;
         color: #333;
     }
+
     #app {
         display: flex;
         flex-direction: column;
@@ -23,17 +24,21 @@ $current_page = basename($_SERVER['PHP_SELF']);
         color: #fff;
         min-height: 100vh;
     }
+
     #sidebar .nav-link {
         color: #bfc5d8;
         font-weight: 500;
     }
+
     #sidebar .nav-link.active {
         color: #fff;
         background-color: #553d67;
     }
+
     #sidebar .nav-link:hover {
         color: #f64c72;
     }
+
     #sidebar .nav-item {
         margin: 15px 0;
     }
@@ -50,9 +55,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
     main {
         background-color: #f9fafb;
     }
+
     .container {
         padding-top: 20px;
     }
+
     h1#users-header {
         color: #242582;
         font-weight: 600;
@@ -73,6 +80,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             width: 100%;
             z-index: 1000;
         }
+
         main {
             margin-top: 60px;
         }
@@ -82,7 +90,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <body>
     <div id="app">
         <?php
-        include APP_DIR.'views/templates/nav.php';
+        include APP_DIR . 'views/templates/nav.php';
         ?>
 
         <div class="container-fluid">
@@ -103,7 +111,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                                     Classes
                                 </a>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link <?php echo ($current_page == 'aboutus.php') ? 'active' : ''; ?>" href="/about-us">
                                     About Us
                                 </a>
@@ -122,8 +130,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
                                 <div class="container mt-4">
 
                                     <h1>Add New Class</h1>
-                                    
-                                    <form action="<?=site_url('/classes/post');?>" method="POST" class="form-group" id="add-class-form">
+
+                                    <form action="<?= site_url('/classes/post'); ?>" method="POST" class="form-group" id="add-class-form">
                                         <div class="mb-3">
                                             <label for="class_name">Class Type</label>
                                             <select id="class_name" name="class_name" class="form-control" required>
@@ -154,7 +162,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                                         </div>
                                         <button type="submit" class="btn btn-primary">Add Class</button>
                                     </form>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -163,8 +171,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </body>
+
 </html>

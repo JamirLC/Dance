@@ -1,21 +1,22 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Register</title>
-    <link rel="icon" type="image/png" href="<?=base_url();?>public/img/favicon.ico"/>
+    <link rel="icon" type="image/png" href="<?= base_url(); ?>public/img/favicon.ico" />
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
-    <link href="<?=base_url();?>public/css/main.css" rel="stylesheet">
-    <link href="<?=base_url();?>public/css/style.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>public/css/main.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>public/css/style.css" rel="stylesheet">
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <style>
         /* General Styling */
         body {
-            font-family: Arial, sans-serif;
+            font-family: Nunito, sans-serif;
             background-color: #f7f9fc;
             margin: 0;
             padding: 0;
@@ -76,13 +77,11 @@
         /* Main Content */
         main {
             flex-grow: 1;
-            margin-left: 320px; /* Sidebar width */
+            /* Sidebar width */
             padding: 40px 20px;
             background-color: #f9fafb;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
         }
 
         .card {
@@ -123,7 +122,7 @@
         }
 
         .btn-primary:hover {
-            background-color: #1e90ff;
+            background-color: #1E90FF;
         }
 
         .invalid-feedback {
@@ -146,48 +145,44 @@
         }
     </style>
 </head>
-<body>
-    <div id="app">
-        
 
+<body>
+    <?php include APP_DIR . 'views/templates/nav_auth.php'; ?>
+    <div id="app">
         <!-- Main Content -->
         <main>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card">
-                            <div class="card-header">Register</div>
+                            <div class="card-header text-center">Register</div>
                             <div class="card-body">
                                 <?php flash_alert(); ?>
-                                <form id="regForm" method="POST" action="<?=site_url('auth/register');?>">
+                                <form id="regForm" method="POST" action="<?= site_url('auth/register'); ?>">
                                     <?php csrf_field(); ?>
-                                    <div class="row mb-3">
-                                        <label for="username" class="col-md-4 col-form-label text-md-end">Username</label>
-                                        <div class="col-md-6">
-                                            <input id="username" type="text" class="form-control" name="username" required>
+                                    <div class="row mb-3 d-flex align-items-center justify-content-center">
+                                        <div class="col-md-8">
+                                            <input id="username" type="text" class="form-control" name="username" placeholder="Name" required>
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <label for="email" class="col-md-4 col-form-label text-md-end">Email Address</label>
-                                        <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control" name="email" value="" required>
+                                    <div class="row mb-3 d-flex align-items-center justify-content-center">
+                                        <div class="col-md-8">
+                                            <input id="email" type="email" class="form-control" name="email" value="" placeholder="Email" required>
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
-                                        <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control" name="password" required>
+                                    <div class="row mb-3 d-flex align-items-center justify-content-center">
+                                        <div class="col-md-8">
+                                            <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <label for="password_confirmation" class="col-md-4 col-form-label text-md-end">Confirm Password</label>
-                                        <div class="col-md-6">
-                                            <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required>
+                                    <div class="row mb-3 d-flex align-items-center justify-content-center">
+                                        <div class="col-md-8">
+                                            <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required>
                                         </div>
                                     </div>
-                                    <div class="row mb-0">
-                                        <div class="col-md-6 offset-md-4">
-                                            <button type="submit" class="btn btn-primary">
+                                    <div class="row mb-3 d-flex align-items-center justify-content-center">
+                                        <div class="col-md-8">
+                                            <button type="submit" class="btn btn-primary w-100">
                                                 Register
                                             </button>
                                         </div>
@@ -208,7 +203,7 @@
     <script>
         $(function() {
             var regForm = $("#regForm")
-            if(regForm.length) {
+            if (regForm.length) {
                 regForm.validate({
                     rules: {
                         email: {
@@ -230,7 +225,7 @@
                     },
                     messages: {
                         email: {
-                            required: "Please input your email address.",                            
+                            required: "Please input your email address.",
                         },
                         password: {
                             required: "Please input your password",
@@ -241,7 +236,7 @@
                             minlength: jQuery.validator.format("Password must be at least {0} characters.")
                         },
                         username: {
-                            required: "Please input your username.",                            
+                            required: "Please input your username.",
                         }
                     },
                 })
@@ -249,4 +244,5 @@
         })
     </script>
 </body>
+
 </html>

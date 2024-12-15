@@ -1,11 +1,12 @@
 <?php
-include APP_DIR.'views/templates/header.php';
+include APP_DIR . 'views/templates/header.php';
 
 // Get the current page name to highlight the active link
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +21,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <style>
         /* General Styling */
         body {
-            font-family: Arial, sans-serif;
+            font-family: Nunito, sans-serif;
             background-color: #f7f9fc;
             color: #333;
             margin: 0;
@@ -34,13 +35,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
         }
 
         /* Sidebar Styling */
+        /* Sidebar Styling */
         #sidebar {
-            width: 300px;
-            background-color: #fff; /* White background for the sidebar */
+            background-color: #fff;
+            /* Set sidebar background color to white */
             color: #333;
-            min-height: 200vh;
-            border-right: 1px solid #ddd;
-            padding: 20px 10px;
+            min-height: 100vh;
         }
 
         #sidebar .logo {
@@ -52,36 +52,49 @@ $current_page = basename($_SERVER['PHP_SELF']);
             max-width: 200px;
         }
 
-        #sidebar ul {
-            list-style: none;
-            padding: 0;
+        #sidebar .nav-link {
+            color: #333;
+            /* Dark text color */
+            font-size: 18px;
+            /* Increase text size */
+            display: flex;
+            align-items: center;
         }
 
-        #sidebar ul li {
+        #sidebar .nav-link.active {
+            color: #1E90FF;
+            /* Active link blue */
+            font-weight: bold;
+            /* Make active link bold */
+        }
+
+        #sidebar .nav-link .icon {
+            margin-right: 10px;
+            /* Add spacing between icon and text */
+            font-size: 20px;
+            /* Set icon size */
+        }
+
+        #sidebar .nav-item {
             margin: 15px 0;
         }
 
-        #sidebar ul li a {
-            display: flex;
-            align-items: center;
-            color: #333; /* Dark text color */
-            text-decoration: none;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 18px;
-            transition: background-color 0.3s, color 0.3s;
+        /* Logo in the sidebar */
+        #sidebar .logo {
+            width: 200px;
+            /* Set the width of the logo */
+            margin: 20px auto;
+            /* Center the logo */
+            display: block;
         }
 
-        #sidebar ul li a .icon {
-            margin-right: 10px; /* Spacing between icon and text */
-            font-size: 20px; /* Icon size */
-            color: #1E90FF; /* Blue color for icons */
-        }
 
-        #sidebar ul li a:hover, 
+        #sidebar ul li a:hover,
         #sidebar ul li a.active {
-            background-color: #242582; /* Background on hover and active */
-            color: #fff; /* White text on hover and active */
+            background-color: #242582;
+            /* Background on hover and active */
+            color: #fff;
+            /* White text on hover and active */
         }
 
         /* Main Content Styling */
@@ -90,17 +103,19 @@ $current_page = basename($_SERVER['PHP_SELF']);
             padding: 20px;
             background-color: #f9fafb;
             display: flex;
-            justify-content: center; /* Center the content horizontally */
-            align-items: center; /* Center the content vertically */
-            height: 100vh; /* Full viewport height */
+            justify-content: center;
+            align-items: center;
         }
 
         /* Container Styling */
         .container {
-            width: 80%; /* Make the container take 80% of the width */
-            max-width: 1200px; /* Ensure it doesn't grow too large */
+            width: 80%;
+            /* Make the container take 80% of the width */
+            max-width: 1200px;
+            /* Ensure it doesn't grow too large */
             padding-top: 20px;
-            margin: 0 auto; /* Center the container horizontally */
+            margin: 0 auto;
+            /* Center the container horizontally */
             margin-left: 30px;
         }
 
@@ -130,11 +145,13 @@ $current_page = basename($_SERVER['PHP_SELF']);
         .box-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px; /* Increase space between boxes */
+            gap: 20px;
+            /* Increase space between boxes */
         }
 
         .box {
-            flex: 0 0 18%; /* Each box takes up 18% of the width to fit 5 per row */
+            flex: 0 0 18%;
+            /* Each box takes up 18% of the width to fit 5 per row */
             box-sizing: border-box;
             background-color: #fff;
             border: 1px solid #ddd;
@@ -148,8 +165,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
         .box img {
             width: 100%;
             height: auto;
-            max-height: 250px; /* Set max height for images */
-            object-fit: cover; /* Ensure images are cropped to fit */
+            max-height: 250px;
+            /* Set max height for images */
+            object-fit: cover;
+            /* Ensure images are cropped to fit */
             border-radius: 5px;
         }
 
@@ -207,10 +226,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
             text-decoration: none;
             cursor: pointer;
         }
-
     </style>
 </head>
+
 <body>
+    <?php include APP_DIR . 'views/templates/nav.php'; ?>
     <div id="app">
         <!-- Sidebar -->
         <nav id="sidebar">
@@ -256,7 +276,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                             <div class="card-body">
                                 <h2>Welcome to our Dance Studio!</h2>
                                 <p>Welcome to our Dance Studio, where passion meets movement! Our studio offers a welcoming environment for dancers of all levels...</p>
-                                
+
                                 <!-- Box Container with 5 Boxes per Row -->
                                 <div class="box-container">
                                     <!-- Boxes for each image and dance type -->
@@ -346,4 +366,5 @@ $current_page = basename($_SERVER['PHP_SELF']);
         }
     </script>
 </body>
+
 </html>
