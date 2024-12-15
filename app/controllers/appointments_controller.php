@@ -8,10 +8,13 @@ class Appointments_controller extends Controller
     {
         parent::__construct();
         $userRole = $this->session->userdata('role');
-        if ($userRole != 'user') {
-            redirect('/');
+        if ($userRole != 'admin') {
+            redirect('auth');
         }
-        $this->call->model('appointments_model'); // Load the Appointments model
+        if (! logged_in()) {
+            redirect('auth');
+        }
+        $this->call->model('appointments_model');
     }
 
     public function index()
@@ -132,8 +135,6 @@ class Appointments_controller extends Controller
     {
         // Fetch classes from the database using the model
         $classes = $this->appointments_model->getClasses();
-
-        // Return the classes as JSON for AJAX
         echo json_encode($classes);
     }
 

@@ -5,12 +5,13 @@ class Home extends Controller {
 
     public function __construct() {
         parent::__construct();
-        
-        // Ensure the user is logged in before accessing these features
+        $userRole = $this->session->userdata('role');
+        if ($userRole != 'admin') {
+            redirect('auth');
+        }
         if (! logged_in()) {
             redirect('auth');
         }
-
         // Load required models
         $this->call->model('dashboard_model');
         $this->call->model('classes_model');
@@ -26,7 +27,6 @@ class Home extends Controller {
         $this->call->view('homepage', $data);
     }
 
-    
 
     public function aboutus() {
         
