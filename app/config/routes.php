@@ -27,6 +27,10 @@ $router->match('/appointments/edit/{id}', 'Appointments_controller::edit_appoint
 # Calendar routes
 $router->get('/calendar', 'Calendar_controller::index');  // Calendar view with appointments marked
 
+$router->get('/appoint', 'Appointments_controller::appoint'); // View all appoint
+$router->get('/appointments/get_classes', 'Appointments_controller::getClasses'); // AJAX route for fetching classes
+$router->post('/appointments/register_class/{class_id}', 'Appointments_controller::registerClass');
+
 # Auth routes (Group)
 $router->group('/auth', function () use ($router) {
     $router->match('/register', 'Auth::register', ['POST', 'GET']);  // Register route
@@ -36,7 +40,7 @@ $router->group('/auth', function () use ($router) {
     $router->match('/set-new-password', 'Auth::set_new_password', ['POST', 'GET']);  // Set new password route
 });
 
-
-$router->get('/appoint', 'Appointments_controller::appoint');  // View all appoint
-$router->get('/appointments/get_classes', 'Appointments_controller::getClasses'); // AJAX route for fetching classes
-$router->post('/appointments/register_class/{class_id}', 'Appointments_controller::registerClass');
+$router->get('/unauthorized', function () {
+    echo "You are not authorized to access this page.";
+    exit;
+});

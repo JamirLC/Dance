@@ -7,6 +7,10 @@ class Appointments_controller extends Controller
     public function __construct()
     {
         parent::__construct();
+        $userRole = $this->session->userdata('role');
+        if ($userRole != 'user') {
+            redirect('/');
+        }
         $this->call->model('appointments_model'); // Load the Appointments model
     }
 
@@ -40,11 +44,6 @@ class Appointments_controller extends Controller
 
         $this->call->view('appointments/index', $data);
     }
-
-
-
-
-
 
 
     // Show appointment creation form
