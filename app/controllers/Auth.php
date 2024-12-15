@@ -16,9 +16,6 @@ class Auth extends Controller
                 } else if ($userRole == 'user'){
                     redirect('/appoint'); 
                 }
-                else{
-                    redirect('/unauthorized');
-                }
             }
         }
         $this->call->library('email');
@@ -83,7 +80,7 @@ class Auth extends Controller
                 if ($this->lauth->register($username, $email, $this->io->post('password'), $email_token)) {
                     $data = $this->lauth->login($email, $this->io->post('password'));
                     $this->lauth->set_logged_in($data);
-                    redirect('appoint');
+                    redirect('auth');
                 } else {
                     set_flash_alert('danger', config_item('SQLError'));
                 }

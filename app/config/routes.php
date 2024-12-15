@@ -39,8 +39,3 @@ $router->group('/auth', function () use ($router) {
     $router->match('/password-reset', 'Auth::password_reset', ['POST', 'GET']);  // Password reset route
     $router->match('/set-new-password', 'Auth::set_new_password', ['POST', 'GET']);  // Set new password route
 });
-
-$router->get('/unauthorized', function () {
-    echo "You are not authorized to access this page.";
-    exit;
-});
