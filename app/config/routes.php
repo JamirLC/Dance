@@ -27,9 +27,9 @@ $router->match('/appointments/edit/{id}', 'Appointments_controller::edit_appoint
 # Calendar routes
 $router->get('/calendar', 'Calendar_controller::index');  // Calendar view with appointments marked
 
-$router->get('/appoint', 'Appointments_controller::appoint'); // View all appoint
-$router->get('/appointments/get_classes', 'Appointments_controller::getClasses'); // AJAX route for fetching classes
-$router->post('/appointments/register_class/{class_id}', 'Appointments_controller::registerClass');
+$router->get('/appoint', 'UserAppointment::appoint'); // View all appoint
+$router->get('/appointments/get_classes', 'UserAppointment::getClasses'); // AJAX route for fetching classes
+$router->post('/appointments/register_class/{class_id}', 'UserAppointment::registerClass');
 
 # Auth routes (Group)
 $router->group('/auth', function () use ($router) {
