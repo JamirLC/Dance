@@ -36,4 +36,5 @@ $router->group('/auth', function () use ($router) {
     $router->match('/set-new-password', 'Auth::set_new_password', ['POST', 'GET']);  // Set new password route
 });
 
-$router->get('/appoint', 'Appointments_controller::appoint');  // View all appointments
+$router->get('/appoint', 'Appointments_controller::appoint');  // View all appoint
+$router->get('/appointments/get_classes', 'Appointments_controller::getClasses'); // AJAX route for fetching classes

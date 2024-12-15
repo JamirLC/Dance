@@ -1,14 +1,16 @@
 <?php
-defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
+defined('PREVENT_DIRECT_ACCESS') or exit('No direct script access allowed');
 
-class Appointments_model extends Model {
+class Appointments_model extends Model
+{
 
     /**
      * Fetch all appointments
      *
      * @return array|false Array of appointments or false on failure
      */
-    public function getAppointments() {
+    public function getAppointments()
+    {
         return $this->db->table('appointments')->get_all(); // Fetching all records from 'appointments' table
     }
 
@@ -21,7 +23,8 @@ class Appointments_model extends Model {
      * @param string $appointment_time
      * @return bool True on success, false on failure
      */
-    public function createAppointment($name, $email, $appointment_date, $appointment_time) {
+    public function createAppointment($name, $email, $appointment_date, $appointment_time)
+    {
         $data = [
             'name' => $name,
             'email' => $email,
@@ -37,7 +40,8 @@ class Appointments_model extends Model {
      * @param int $id Appointment ID
      * @return bool True on success, false on failure
      */
-    public function deleteAppointment($id) {
+    public function deleteAppointment($id)
+    {
         if (!is_numeric($id)) {
             return false;
         }
@@ -49,9 +53,19 @@ class Appointments_model extends Model {
      *
      * @return array|false Array of appointment dates or false on failure
      */
-    public function getAppointmentsForCalendar() {
+    public function getAppointmentsForCalendar()
+    {
         // Fetching all appointments with only the appointment date
         return $this->db->table('appointments')->select('appointment_date')->get_all();
     }
+
+    /**
+     * Fetch all classes
+     *
+     * @return array|false Array of classes or false on failure
+     */
+    public function getClasses()
+    {
+        return $this->db->table('dance_classes')->get_all(); // Fetching all records from 'classes' table
+    }
 }
-?>

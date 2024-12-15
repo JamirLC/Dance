@@ -96,9 +96,18 @@ class Appointments_controller extends Controller
     public function appoint()
     {
         // Fetch all appointments from the model
-        $data['appointments'] = $this->appointments_model->getAppointments();
+        // $data['appointments'] = $this->appointments_model->getAppointments();
 
         // Pass data to the view
-        $this->call->view('user/appoint', $data);
+        $this->call->view('user/appoint');
+    }
+
+    public function getClasses()
+    {
+        // Fetch classes from the database using the model
+        $classes = $this->appointments_model->getClasses();
+
+        // Return the classes as JSON for AJAX
+        echo json_encode($classes);
     }
 }

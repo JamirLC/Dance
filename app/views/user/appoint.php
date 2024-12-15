@@ -30,24 +30,49 @@
     </nav>
 
     <div class="container mt-4">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title">Class Name</h5>
-                            <p class="card-text mb-0">Time here</p>
-                        </div>
-                        <p class="card-text">Proctor name here</p>
-                        <a href="#" class="btn btn-primary">Register</a>
-                    </div>
-                </div>
-            </div>
-
+        <div id="class-list" class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- Classes will be loaded dynamically here -->
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch classes via AJAX when the page loads
+            fetchClasses();
+
+            function fetchClasses() {
+                fetch('/appointments/get_classes')
+                    .then(response => response.json())
+                    .then(classes => {
+                        // Get the container where classes will be displayed
+                        const classList = document.getElementById('class-list');
+                        classList.innerHTML = ''; // Clear existing content
+
+                        // Loop through the classes and create cards
+                        classes.forEach(cls => {
+                            const card = `
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title">${cls.class_name}</h5>
+                                            <p class="card-text mb-0">${cls.class_time}</p>
+                                        </div>
+                                        <p class="card-text">Instructor: ${cls.instructor_name}</p>
+                                        <p class="card-text">Slots Available: ${cls.available_slots}</p>
+                                        <a href="#" class="btn btn-primary">Register</a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                            classList.innerHTML += card;
+                        });
+                    })
+                    .catch(error => console.error('Error fetching classes:', error));
+            }
+        });
+    </script>
 </body>
 
 </html>
