@@ -113,7 +113,7 @@
         }
 
         .btn-primary {
-            background-color: #f64c72;
+            background-color: #242582;
             color: #fff;
             border-radius: 5px;
             padding: 10px 15px;
@@ -122,7 +122,7 @@
         }
 
         .btn-primary:hover {
-            background-color: #f64c72;
+            background-color: #1E90FF;
         }
 
         .invalid-feedback {
