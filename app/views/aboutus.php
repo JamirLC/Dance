@@ -35,14 +35,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
         }
 
         /* Sidebar Styling */
+        /* Sidebar Styling */
         #sidebar {
-            width: 300px;
             background-color: #fff;
-            /* White background for the sidebar */
+            /* Set sidebar background color to white */
             color: #333;
-            min-height: 200vh;
-            border-right: 1px solid #ddd;
-            padding: 20px 10px;
+            min-height: 100vh;
         }
 
         #sidebar .logo {
@@ -54,35 +52,42 @@ $current_page = basename($_SERVER['PHP_SELF']);
             max-width: 200px;
         }
 
-        #sidebar ul {
-            list-style: none;
-            padding: 0;
+        #sidebar .nav-link {
+            color: #333;
+            /* Dark text color */
+            font-size: 18px;
+            /* Increase text size */
+            display: flex;
+            align-items: center;
         }
 
-        #sidebar ul li {
+        #sidebar .nav-link.active {
+            color: #1E90FF;
+            /* Active link blue */
+            font-weight: bold;
+            /* Make active link bold */
+        }
+
+        #sidebar .nav-link .icon {
+            margin-right: 10px;
+            /* Add spacing between icon and text */
+            font-size: 20px;
+            /* Set icon size */
+        }
+
+        #sidebar .nav-item {
             margin: 15px 0;
         }
 
-        #sidebar ul li a {
-            display: flex;
-            align-items: center;
-            color: #333;
-            /* Dark text color */
-            text-decoration: none;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 18px;
-            transition: background-color 0.3s, color 0.3s;
+        /* Logo in the sidebar */
+        #sidebar .logo {
+            width: 200px;
+            /* Set the width of the logo */
+            margin: 20px auto;
+            /* Center the logo */
+            display: block;
         }
 
-        #sidebar ul li a .icon {
-            margin-right: 10px;
-            /* Spacing between icon and text */
-            font-size: 20px;
-            /* Icon size */
-            color: #1E90FF;
-            /* Blue color for icons */
-        }
 
         #sidebar ul li a:hover,
         #sidebar ul li a.active {
@@ -99,11 +104,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             background-color: #f9fafb;
             display: flex;
             justify-content: center;
-            /* Center the content horizontally */
             align-items: center;
-            /* Center the content vertically */
-            height: 100vh;
-            /* Full viewport height */
         }
 
         /* Container Styling */
@@ -229,6 +230,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 </head>
 
 <body>
+    <?php include APP_DIR . 'views/templates/nav.php'; ?>
     <div id="app">
         <!-- Sidebar -->
         <nav id="sidebar">

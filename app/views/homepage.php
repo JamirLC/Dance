@@ -76,6 +76,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
             margin-top: 60px;
         }
     }
+
+    #sidebar ul li a:hover,
+    #sidebar ul li a.active {
+        background-color: #242582;
+        /* Background on hover and active */
+        color: #fff;
+        /* White text on hover and active */
+    }
 </style>
 
 <body>
