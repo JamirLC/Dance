@@ -8,7 +8,7 @@ class UserAppointment extends Controller
     {
         parent::__construct();
         $userRole = $this->session->userdata('role');
-        if ($userRole != 'admin') {
+        if ($userRole != 'user') {
             redirect('auth');
         }
         if (! logged_in()) {
