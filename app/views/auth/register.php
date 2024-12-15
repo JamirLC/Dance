@@ -16,7 +16,7 @@
     <style>
         /* General Styling */
         body {
-            font-family: Arial, sans-serif;
+            font-family: Nunito, sans-serif;
             background-color: #f7f9fc;
             margin: 0;
             padding: 0;
@@ -155,7 +155,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card">
-                            <div class="card-header">Register</div>
+                            <div class="card-header text-center">Register</div>
                             <div class="card-body">
                                 <?php flash_alert(); ?>
                                 <form id="regForm" method="POST" action="<?= site_url('auth/register'); ?>">

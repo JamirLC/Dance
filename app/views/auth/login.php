@@ -15,7 +15,7 @@
     <style>
         /* General Styling */
         body {
-            font-family: Arial, sans-serif;
+            font-family: Nunito, sans-serif;
             background-color: #f7f9fc;
             margin: 0;
             padding: 0;
