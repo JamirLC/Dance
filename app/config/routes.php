@@ -15,6 +15,7 @@ $router->get('/add-class', 'Home::Class_form');  // Add class form route
 $router->match('/classes/post', 'Home::Create_class', 'GET|POST');  // Create class (POST method)
 $router->get('/classes/delete/{id}', 'Home::delete_class');  // Delete class by ID
 $router->match('/classes/update/{id}', 'Home::update_class', 'GET|POST');  // Update class (GET and POST methods)
+$router->get('/getClass/{id}', 'Home::getClass');
 
 # Appointment routes
 $router->get('/appointments', 'Appointments_controller::index');  // View all appointments
@@ -24,13 +25,13 @@ $router->get('/appointments/delete/{id}', 'Appointments_controller::delete');  /
 $router->get('/appointments/view/{id}', 'Appointments_controller::view_appointment');  // View specific appointment
 $router->match('/appointments/edit/{id}', 'Appointments_controller::edit_appointment', 'GET|POST');  // Edit appointment (GET/POST)
 
+
 # Calendar routes
 $router->get('/calendar', 'Calendar_controller::index');  // Calendar view with appointments marked
-
 $router->get('/appoint', 'UserAppointment::appoint'); // View all appoint
 $router->get('/appointments/get_classes', 'UserAppointment::getClasses'); // AJAX route for fetching classes
 $router->post('/appointments/register_class/{class_id}', 'UserAppointment::registerClass');
-$router->get('test', 'UserAppointment::test');
+
 
 # Auth routes (Group)
 $router->group('/auth', function () use ($router) {

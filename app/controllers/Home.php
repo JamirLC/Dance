@@ -29,7 +29,6 @@ class Home extends Controller {
 
 
     public function aboutus() {
-        
         $this->call->view('aboutus',);
     }
 
@@ -59,13 +58,16 @@ class Home extends Controller {
         }
     }
 
-    public function update_class($id) {
-        $class = $this->classes_model->get_class_by_id($id);
-        
+
+    function getClass($id){
+        $class['class']= $this->classes_model->get_class_by_id($id);
         if (!$class) {
             redirect('/classes', ['error' => 'Class not found.']);
         }
-    
+        $this->call->view('templates/updateclass', $class);
+    }
+
+    public function update_class($id) {
         if ($this->io->post()) {
             $class_name = $this->io->post('class_name');
             $instructor_name = $this->io->post('instructor_name');
@@ -84,11 +86,10 @@ class Home extends Controller {
                 redirect('/classes', ['error' => 'Failed to update class.']);
             }
         }
-    
-        $data['class'] = $class;
-        $this->call->view('updateclass', $data);
+        redirect('/classes');
     }
 
+    
     public function delete_class($id) {
         if ($this->classes_model->delete($id)) {
             redirect('/classes', ['success' => 'Class deleted successfully!']);
