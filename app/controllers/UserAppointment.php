@@ -30,17 +30,29 @@ class UserAppointment extends Controller
 
     public function registerClass($class_id)
     {
+        // Validate class_id
         if (!is_numeric($class_id)) {
             echo json_encode(['success' => false, 'message' => 'Invalid class ID']);
             return;
         }
-        
-        $result = $this->appointments_model->reduceClassSlots($class_id);
 
+        if ($this->appointments_model->checkRegistrationStatus($class_id)) {
+            echo json_encode(['success' => false, 'message' => 'User already registered for this class.']);
+            return;
+        }
+
+        $result = $this->appointments_model->reduceClassSlots($class_id);
+        
         if ($result) {
             echo json_encode(['success' => true, 'message' => 'Thank you for registering!']);
         } else {
             echo json_encode(['success' => false, 'message' => 'Registration failed. No slots available.']);
         }
+    }
+
+
+    public function test(){
+        $result = $this->appointments_model->checkRegistrationStatus();
+        echo var_dump($result);
     }
 }

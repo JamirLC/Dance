@@ -30,6 +30,7 @@ $router->get('/calendar', 'Calendar_controller::index');  // Calendar view with 
 $router->get('/appoint', 'UserAppointment::appoint'); // View all appoint
 $router->get('/appointments/get_classes', 'UserAppointment::getClasses'); // AJAX route for fetching classes
 $router->post('/appointments/register_class/{class_id}', 'UserAppointment::registerClass');
+$router->get('test', 'UserAppointment::test');
 
 # Auth routes (Group)
 $router->group('/auth', function () use ($router) {

@@ -88,12 +88,14 @@ class Appointments_model extends Model
         $id = $this->session->userdata('id');
         $sql = "SELECT * FROM appointment WHERE id = ? AND class_id = ?";
         $query = $this->db->raw($sql, [$id, $class_id]);
-        if ($query && $query->count() > 0) {
+        
+        if ($query && $query->rowCount() > 0) {
             return true;
         } else {
             return false;
         }
     }
+
 
     public function getAppointments() {
         $query = 'SELECT 
